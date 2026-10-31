@@ -1,57 +1,13 @@
-# Hassan PS4 Host — v0.1.0
+# Hassan PS4 Host — v0.3.0
 
+Arabic PS4 9.00 host. GoldHEN 2.4b18 (pre-release) and pOOBs4 are bundled locally with original credits. This integration has NOT been tested on physical PS4 hardware.
 
-واجهة عربية ثابتة مصممة لـ PS4 Firmware 9.00. **هذه بنية تأسيسية وليست مشغّل GoldHEN مكتملًا.** لا توجد حمولات مضمّنة أو تشغيل تلقائي أو تحديث نظام أو تهيئة أقراص.
+Open the main page, choose the GoldHEN launcher, and follow its Arabic instructions. The launcher requires the PS4 9.00 browser and an exfathax USB prepared separately on a computer. Writing the USB image erases the selected USB. Insert it only when the exploit requests it, wait for the unsupported-format notification, close the dialog, then remove the USB. Keep it unplugged before reboot.
 
+The payload is downloaded locally and SHA256 checked before loading any exploit scripts. Launch is manual, guarded by a 9.00 user-agent check and two readiness checkboxes. Browser detection is advisory, not a hardware guarantee. No TCP payload receiver is started: bridge.js replaces the upstream run_hax payload-loader tail with a local call to the pinned binary. Upstream vendor JS files are unchanged.
 
-## النشر الحالي
+Sources, exact revisions, byte counts and SHA256 hashes are in docs/tools/900/sources.json. Upstreams do not include an explicit license file in the downloaded release/revision. We retain upstream readmes and credits and do not claim they are MIT, public domain, or licensed by this project. GoldHEN source is private.
 
-الموقع: https://ha7878710-wq.github.io/hassan-ps4-host/
+Run `node scripts/build_cache.cjs` then `node scripts/check.cjs`. The original Python cache builder remains usable; Python check.py delegates to the Node integration checks. AppCache and Service Worker include the complete runtime. Hardware exploit success and offline behavior on a PS4 must be tested separately. No firmware update or USB writing is performed by the website. It does not provide official PSN.
 
-تُنشر النسخة الحالية عبر GitHub Actions من ملف Hassan-PS4-Host.zip. ملفات docs وscripts داخل مجلد hassan-ps4-host في الحزمة. للتطوير، فك الضغط وعدّل الملفات، ثم شغّل فحوص التطوير أدناه وأعد ضغط المجلد واستبدل الحزمة في المستودع. سير النشر يقرأ المصدر ولا يكتب تغييرات إلى المستودع.
-
-نجح نشر الموقع وفتح الواجهة والبحث وتثبيت كاش الواجهة في المتصفح السحابي. لم يُختبر فتح الموقع بعد فصل الشبكة، ولا AppCache أو GoldHEN على PS4 فعلي. الحمولات غير مدمجة حتى الآن.
-
-## طريقة بديلة للنشر بعد رفع الملفات المفكوكة
-1. بعد موافقة المالك، أنشئ مستودعًا عامًا باسم `hassan-ps4-host` وارفع ملفات المشروع.
-2. Settings → Pages → Deploy from a branch → main → /docs → Save.
-3. انتظر نجاح النشر واستخدم الرابط الذي يعرضه GitHub، وليس عنوانًا مفترضًا.
-4. تحقّق أن offline.appcache يُقدّم بنوع `text/cache-manifest`، وأن كل ملف فيه يعيد HTTP 200.
-5. اختبر PS4 9.00 فعليًا: افتح الموقع متصلًا، انتظر اكتمال AppCache، أغلق المتصفح وافتح العنوان نفسه دون اتصال.
-
-
-GitHub Free يتيح Pages للمستودعات العامة. لا تنشر كلمات سر أو بيانات شخصية. لا يحتاج المشروع خدمات مدفوعة أو مكتبات خارجية.
-
-
-## التطوير من الحاسبة
-- ملفات الموقع داخل docs، من دون npm أو خطوة بناء إلزامية.
-- بعد كل تعديل: `python scripts/build_cache.py` ثم `python scripts/check.py`.
-- معاينة محلية: `python -m http.server 8000 --directory docs` ثم افتح localhost:8000. HTTPS مطلوب للأوفلاين في النشر؛ localhost استثناء بالمتصفحات الحديثة.
-- CSS بخطوط النظام وFlexbox. JavaScript الواجهة بصيغة ES5، دون fetch أو modules في واجهة PS4.
-- AppCache للمتصفحات القديمة، وService Worker اختياري للحديثة. AppCache قد لا يعمل قبل التأكد من إعداد الخادم والجهاز الفعلي.
-- navigator.onLine مؤشر للشبكة فقط، وليس اختبارًا لاتصال الإنترنت أو PSN.
-
-
-## دمج الأدوات لاحقاً
-sources.json يحتوي المصدر والحالة، وغير مرتبط بمشغّل تنفيذي. ضع المصادر المختارة في docs/tools/900/vendor، مع رخصها وإثبات إصدارها وبصماتها. لا تُعد تسمية روابط المصادر على أنها أزرار تشغيل.
-راجع ترخيص إعادة التوزيع، وثبّت commit/tag محددًا؛ لا تسحب latest تلقائيًا. حدّث مصادر التوثيق ثم أضف تشغيلًا يدويًا وتحقق من 9.00 قبل تفعيله. أعد توليد الكاش ليشمل الملفات المحلية. تجنّب الموارد الخارجية اللازمة للتشغيل الأوفلاين.
-
-
-## حدود اللعب الجماعي
-LAN يتطلب دعم اللعبة وتوافق الإصدارات. XLink Kai يحتاج برنامج Kai على جهاز مدعوم واتصال إنترنت للأقران البعيدين. الموقع لا ينشئ VPN أو نفق Kai ولا يمنح PSN الرسمي ولا يشغّل كل الألعاب أونلاين.
-
-
-## المصادر
-- https://github.com/GoldHEN/GoldHEN/releases
-- https://github.com/ChendoChap/pOOBs4
-- https://www.teamxlink.co.uk/wiki/PlayStation_4
-- https://www.teamxlink.co.uk/wiki/Playstation_4_XLink_Kai_Setup
-- https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site
-
-
-## فحوص القبول المطلوبة على PS4
-- العربية مقروءة على التلفزيون والتنقل بالمؤشر أو يد التحكم عملي.
-- يكتمل AppCache ثم تفتح الواجهة بعد فصل الإنترنت وإغلاق المتصفح.
-- لا يظهر تأكيد تخزين عند فشل الحفظ.
-- أي أدوات تضاف لاحقًا تُختبر منفصلة؛ لا يُستنتج نجاحها من عمل الواجهة.
-
+Publish by replacing Hassan-PS4-Host.zip in the repository root. Existing GitHub Actions extracts this directory and publishes docs.
