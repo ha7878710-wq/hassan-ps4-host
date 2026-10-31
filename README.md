@@ -1,4 +1,4 @@
-# Hassan PS4 Host — v0.4.0
+# Hassan PS4 Host — v0.4.1
 
 Arabic PS4 9.00 host. All 17 releases currently published on the official GoldHEN releases page are listed. The 15 releases with PS4 9.00 payloads are bundled locally with original credits; 1.0 and 1.1 are disabled because their archives contain no 9.00 payload. This integration has NOT been tested on physical PS4 hardware.
 
@@ -11,4 +11,5 @@ Sources, exact revisions, byte counts and SHA256 hashes are in docs/tools/900/so
 Run `node scripts/build_cache.cjs` then `node scripts/check.cjs`. The original Python cache builder remains usable; Python check.py delegates to the Node integration checks. AppCache and Service Worker include the complete runtime. Hardware exploit success and offline behavior on a PS4 must be tested separately. No firmware update or USB writing is performed by the website. It does not provide official PSN.
 
 Publish by replacing Hassan-PS4-Host.zip in the repository root. Existing GitHub Actions extracts this directory and publishes docs.
+
 
