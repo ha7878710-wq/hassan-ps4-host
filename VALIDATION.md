@@ -1,10 +1,7 @@
-# Validation — v0.3.0
+# Validation — v0.4.0
 
-2026-10-31: PASSED local JS syntax and references, complete cache coverage, upstream-file SHA256 checks, runtime SHA256 known vectors and official payload hash, zero network or exploit invocation on page open, unsupported-browser and wrong-firmware blocking, corrupt-payload rejection.
+2026-10-31: PASS JavaScript syntax, local references, all pinned vendor hashes, all 15 payload hashes, offline manifest coverage for all releases, 17 visible release entries, persisted version selection, each selected release mapping to its own binary, wrong-firmware blocking, no launch on page open, and corrupted-payload rejection.
 
-Browser check: Arabic launcher renders; both readiness checkboxes can be selected and the launch button remains disabled on the desktop browser as intended. No PS4 exploit was executed on the computer.
+Desktop browser: compact Arabic Hassan launcher renders; selecting 2.3 updates its heading and remains selected after reload. Unsupported 1.x releases are disabled. Desktop launch remains disabled. Long instructions and readiness checkboxes were removed from the launcher as requested. USB prompt behavior in the upstream exploit is unchanged.
 
-NOT TESTED: real PS4 9.00 WebKit/kernel exploit, native GoldHEN execution, USB timing, PS4 AppCache and full offline hardware operation. This is an integrated build awaiting console validation, not a guarantee of successful activation.
-
-GoldHEN: 2.4b18 (official pre-release); goldhen.bin 260160 bytes; SHA256 eb9fee5e9e3618c0a144a6fc6b8fc1ec7e89cf06483ad64ae7c1085efc9525a3.
-pOOBs4: commit 886f4a07d0793ea6ee945ba064c6056e3af0231c. Original vendor JS retained unchanged. bridge.js replaces the TCP loader with direct local payload execution; console validation remains required.
+NOT TESTED: actual PS4 WebKit/kernel exploit, any native GoldHEN execution, PS4 offline operation. Release availability means an official 9.00 payload is bundled, not a guarantee of successful activation on hardware.
